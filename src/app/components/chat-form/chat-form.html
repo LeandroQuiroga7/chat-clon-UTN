@@ -1,1 +1,12 @@
-<p>chat-form !</p>
+<div class="form-container">
+  <h3>Nuevo Contacto</h3>
+  <form [formGroup]="nuevoChatForm" (ngSubmit)="agregarChat()">
+    <div class="field">
+      <label>Nombre del contacto:</label>
+      <input type="text" formControlName="contactName" placeholder="Ej: Leandro Quiroga">
+    </div>
+    
+    <button type="submit" [disabled]="nuevoChatForm.invalid">Crear Chat</button>
+    <button type="button" (click)="router.navigate(['/chats'])">Cancelar</button>
+  </form>
+</div>

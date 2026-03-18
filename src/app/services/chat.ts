@@ -31,4 +31,18 @@ export class ChatService {
   getChatById(id: number) {
     return this.chats().find(c => c.id === id);
   }
+
+  addChat(nombre: string, avatar: string) {
+  
+  const nuevoChat = {
+    id: Date.now(), 
+    contactName: nombre,
+    avatar: avatar,
+    status: 'online', 
+    messages: [] 
+  };
+
+
+  this.chats.update(currentChats => [...currentChats, nuevoChat]);
+}
 }

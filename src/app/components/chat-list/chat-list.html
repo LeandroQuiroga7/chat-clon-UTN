@@ -1,1 +1,38 @@
-<p>chat-list !</p>
+<div class="chat-list-container">
+  <div class="list-header">
+    <h2>Mis Chats</h2>
+    <button class="new-chat-btn" routerLink="/nuevo">+</button>
+  </div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Buscar un contacto...">
+  </div>
+
+  <div class="chats-scroll">
+    @for (chat of chats(); track chat.id) {
+      <a [routerLink]="['/chats', chat.id]" 
+         routerLinkActive="selected-chat" 
+         class="chat-card">
+        
+        <div class="avatar-container">
+          <img [src]="chat.avatar" [alt]="chat.contactName">
+          <span class="status-indicator" [ngClass]="chat.status"></span>
+        </div>
+
+        <div class="chat-details">
+          <div class="top-row">
+            <span class="contact-name">{{ chat.contactName }}</span>
+            <span class="time">12:45</span>
+          </div>
+          <p class="last-message">
+            {{ chat.messages.length > 0 ? chat.messages[chat.messages.length - 1].text : 'Sin mensajes aún' }}
+          </p>
+        </div>
+      </a>
+    } @empty {
+      <div class="empty-list">
+        <p>No se encontraron chats.</p>
+      </div>
+    }
+  </div>
+</div>
