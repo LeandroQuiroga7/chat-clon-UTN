@@ -9,8 +9,8 @@ export class ChatService {
   public chats = signal<Chat[]>([
     {
       id: 1,
-      contactName: 'Quiroga',
-      avatar: 'https://i.pravatar.cc/150?u=aiden',
+      contactName: 'Quiroga Leandro',
+      avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
       status: 'online',
       messages: [
         { text: 'Hola! ¿Como estas?', sender: 'app', timestamp: new Date() }
@@ -18,8 +18,8 @@ export class ChatService {
     },
     {
       id: 2,
-      contactName: 'Leandro',
-      avatar: 'https://i.pravatar.cc/150?u=vincent',
+      contactName: 'Leandro Quiroga',
+      avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
       status: 'offline',
       messages: []
     }
@@ -37,7 +37,7 @@ export class ChatService {
   const nuevoChat = {
     id: Date.now(), 
     contactName: nombre,
-    avatar: avatar,
+    avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
     status: 'online', 
     messages: [] 
   };

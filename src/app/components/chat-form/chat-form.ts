@@ -16,24 +16,24 @@ export class ChatFormComponent {
   chatService = inject(ChatService);
   router = inject(Router);
 
-  
+  cancelar() {
+  this.router.navigate(['/']); 
+}
   nuevoChatForm = new FormGroup({
     contactName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     
-    avatar: new FormControl('https://i.pravatar.cc/150?u=' + Math.random(), [Validators.required])
   });
 
   agregarChat() {
     
     if (this.nuevoChatForm.valid) {
       const nombre = this.nuevoChatForm.value.contactName ?? '';
-      const avatar = this.nuevoChatForm.value.avatar ?? '';
 
       
-      this.chatService.addChat(nombre, avatar);
+      this.chatService.addChat(nombre, '');
       
       
-      this.router.navigate(['/chats']);
+      this.router.navigate(['/']);
     }
   }
 }

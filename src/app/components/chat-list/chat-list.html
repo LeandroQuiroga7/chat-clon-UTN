@@ -5,11 +5,12 @@
   </div>
 
   <div class="search-box">
-    <input type="text" placeholder="Buscar un contacto...">
+    <input type="text" placeholder="Buscar un contacto..."
+    (input)="onSearch($event)">
   </div>
 
   <div class="chats-scroll">
-    @for (chat of chats(); track chat.id) {
+    @for (chat of filteredChats(); track chat.id) {
       <a [routerLink]="['/chats', chat.id]" 
          routerLinkActive="selected-chat" 
          class="chat-card">

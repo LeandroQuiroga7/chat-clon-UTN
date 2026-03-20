@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChatService } from '../../services/chat';
 import { RouterModule } from '@angular/router';
@@ -12,5 +12,20 @@ import { RouterModule } from '@angular/router';
 })
 export class ChatListComponent {
   chatService = inject(ChatService);
-  chats = this.chatService.chats;
+ 
+  searchTerm = signal('');
+
+  
+  filteredChats = computed(() => {
+    const term = this.searchTerm().toLowerCase();
+    return this.chatService.chats().filter(chat => 
+      chat.contactName.toLowerCase().includes(term)
+    );
+  });
+
+  
+  onSearch(event: Event) {
+    const element = event.target as HTMLInputElement;
+    this.searchTerm.set(element.value);
+  }
 }
