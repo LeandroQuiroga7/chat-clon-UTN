@@ -1,12 +1,23 @@
-<div class="form-container">
-  <h3>Nuevo Contacto</h3>
-  <form [formGroup]="nuevoChatForm" (ngSubmit)="agregarChat()">
-    <div class="field">
-      <label>Nombre del contacto:</label>
-      <input type="text" formControlName="contactName" placeholder="Ej: Leandro Quiroga">
-    </div>
+<div class="form-overlay">
+  <div class="form-card">
+    <h3>Nuevo Contacto</h3>
     
-    <button type="submit" [disabled]="nuevoChatForm.invalid">Crear Chat</button>
-    <button type="button" (click)="cancelar()">Cancelar</button>
-  </form>
+    <form [formGroup]="nuevoChatForm" (ngSubmit)="agregarChat()">
+      <div class="field">
+        <label>Nombre del contacto:</label>
+        <input type="text" 
+               formControlName="contactName" 
+               placeholder="Ej: Leandro Quiroga">
+      </div>
+      
+      <div class="button-group">
+        <button type="button" class="btn-cancel" (click)="cancelar()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-create" [disabled]="nuevoChatForm.invalid">
+          Crear Chat
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

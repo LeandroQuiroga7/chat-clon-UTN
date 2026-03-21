@@ -5,5 +5,5 @@ import { ChatFormComponent } from './components/chat-form/chat-form';
 export const routes: Routes = [
   { path: 'chats/:id', component: ChatWindowComponent },
   { path: 'nuevo', component: ChatFormComponent },
-  { path: '', redirectTo: 'chats', pathMatch: 'full' }
+  { path: '', component: ChatWindowComponent },
 ];
