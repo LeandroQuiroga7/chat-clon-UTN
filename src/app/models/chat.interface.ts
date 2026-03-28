@@ -1,13 +1,13 @@
 export interface Message {
   text: string;
-  sender: 'user' | 'app'; 
-  timestamp: Date;
+  sender: 'me' | 'theirs'; 
+  timestamp: string;      
 }
 
 export interface Chat {
   id: number;
   contactName: string;
   avatar: string;
-  status: string; // online, offline
+  status: string;
   messages: Message[];
 }

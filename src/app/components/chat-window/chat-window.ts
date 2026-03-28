@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed, effect } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../../services/chat';
 import { CommonModule } from '@angular/common';
@@ -15,25 +15,63 @@ export class ChatWindowComponent {
   private route = inject(ActivatedRoute);
   chatService = inject(ChatService);
   
-  activeChat = signal<any>(null);
+  
+  activeChatId = signal<number | null>(null);
+
+
+  activeChat = computed(() => {
+    const id = this.activeChatId();
+    
+    return this.chatService.chats().find(c => c.id === id) || null;
+  });
+
   nuevoMensaje = '';
 
   constructor() {
+    
     this.route.params.subscribe(params => {
-      if (params['id']) {
-        const id = +params['id'];
-        const chat = this.chatService.chats().find(c => c.id === id);
-        this.activeChat.set(chat);
-        console.log('Chat cargado:', chat);
+      const id = +params['id'];
+      if (id) {
+        this.activeChatId.set(id); 
       } else {
-        this.activeChat.set(null);
+        this.activeChatId.set(null);
+      }
+    });
+
+    
+    effect(() => {
+      if (this.activeChat()) {
+        setTimeout(() => {
+          this.scrollToBottom();
+        }, 50);
       }
     });
   }
 
   enviarMensaje() {
-    if (!this.nuevoMensaje.trim()) return;
-    console.log('Enviando:', this.nuevoMensaje);
-    this.nuevoMensaje = '';
+    const id = this.activeChatId();
+    if (!this.nuevoMensaje.trim() || id === null) return;
+
+    
+    this.chatService.agregarMensaje(id, this.nuevoMensaje, 'me');
+    
+    const textoMensaje = this.nuevoMensaje;
+    this.nuevoMensaje = ''; 
+
+    
+    setTimeout(() => {
+      this.chatService.agregarMensaje(
+        id, 
+        `Recibí tu mensaje: "${textoMensaje}". Soy un bot de prueba. 🤖`, 
+        'theirs'
+      );
+    }, 750); 
+  }
+
+  private scrollToBottom(): void {
+    const container = document.querySelector('.messages-list');
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   }
 }

@@ -1,17 +1,17 @@
-@if (activeChat()) {
+@if (activeChat(); as chat) {
   <div class="chat-container">
     <header class="chat-header">
       <div class="avatar-container">
-        <img [src]="activeChat().avatar" alt="avatar">
+        <img [src]="chat.avatar" alt="avatar">
       </div>
-      <span class="contact-name">{{ activeChat().contactName }}</span>
+      <span class="contact-name">{{ chat.contactName }}</span>
     </header>
 
     <div class="messages-list">
-      @for (msg of activeChat().messages; track $index) {
+      @for (msg of chat.messages; track $index) {
         <div class="message-bubble" [ngClass]="msg.sender === 'me' ? 'mine' : 'theirs'">
           <p>{{ msg.text }}</p>
-          <span class="time">{{ msg.timestamp | date:'HH:mm' }}</span>
+          <span class="time">{{ msg.timestamp }}</span>
         </div>
       }
     </div>
@@ -21,11 +21,11 @@
              [(ngModel)]="nuevoMensaje" 
              placeholder="Escribe un mensaje..." 
              (keyup.enter)="enviarMensaje()">
-      <button class="send-btn" (click)="enviarMensaje()">➤</button>
+      <button class="send-btn" [disabled]="!nuevoMensaje.trim()" (click)="enviarMensaje()">➤</button>
     </footer>
   </div>
 } @else {
   <div class="empty-state">
-    <p>Seleccioná un chat</p>
+    <p>Seleccioná un chat para empezar a mensajear</p>
   </div>
 }

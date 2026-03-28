@@ -40,12 +40,24 @@
 }
 
 .message-bubble {
-  max-width: 65%;
+  max-width: 75%; 
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 14px;
   line-height: 1.4;
   box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+
+  
+  word-wrap: break-word;       
+  overflow-wrap: break-word;   
+  white-space: pre-wrap;       
+  
+}
+
+
+.message-bubble p {
+  margin: 0;
+  word-break: break-word; 
 }
 
 .mine {
@@ -85,10 +97,11 @@
   border: 1px solid #fff;
   outline: none;
   font-size: 14px;
-  
   box-sizing: border-box; 
-}
 
+ 
+  min-width: 0; 
+}
 
 .send-btn {
   background-color: #007bff;
@@ -103,7 +116,9 @@
   align-items: center;
   font-size: 18px;
   transition: background 0.2s;
-  flex-shrink: 0;
+  
+  
+  flex-shrink: 0; 
 }
 
 .send-btn:hover {

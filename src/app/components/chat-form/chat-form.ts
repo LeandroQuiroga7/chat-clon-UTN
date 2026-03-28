@@ -30,7 +30,7 @@ export class ChatFormComponent {
       const nombre = this.nuevoChatForm.value.contactName ?? '';
 
       
-      this.chatService.addChat(nombre, '');
+      this.chatService.addChat(nombre, );
       
       
       this.router.navigate(['/']);
