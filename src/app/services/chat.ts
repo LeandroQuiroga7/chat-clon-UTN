@@ -1,10 +1,11 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, effect } from '@angular/core'; 
 import { Chat, Message } from '../models/chat.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
+  
   
   public chats = signal<Chat[]>([
     {
@@ -29,7 +30,23 @@ export class ChatService {
     }
   ]);
 
-  
+  constructor() {
+    
+    const savedChats = localStorage.getItem('chat_app_data');
+    if (savedChats) {
+      try {
+        this.chats.set(JSON.parse(savedChats));
+      } catch (e) {
+        console.error("Error al cargar desde LocalStorage", e);
+      }
+    }
+
+    
+    effect(() => {
+      localStorage.setItem('chat_app_data', JSON.stringify(this.chats()));
+    });
+  }
+
   agregarMensaje(chatId: number, texto: string, sender: 'me' | 'theirs') {
     const hora = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -52,7 +69,6 @@ export class ChatService {
     );
   }
 
-  
   addChat(nombre: string) {
     const nuevoChat: Chat = {
       id: Date.now(),
