@@ -134,3 +134,19 @@
   font-size: 18px;
   background-color: #f8f9fa;
 }
+
+.back-btn {
+  display: none; 
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #007bff;
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .back-btn {
+    display: block; 
+  }
+}

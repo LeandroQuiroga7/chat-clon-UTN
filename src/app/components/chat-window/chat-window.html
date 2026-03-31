@@ -1,6 +1,10 @@
 @if (activeChat(); as chat) {
   <div class="chat-container">
     <header class="chat-header">
+      <button class="back-btn" routerLink="/">
+        ←
+      </button>
+
       <div class="avatar-container">
         <img [src]="chat.avatar" alt="avatar">
       </div>
