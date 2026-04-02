@@ -1,59 +1,65 @@
 # ChatClonUtn
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
+Este proyecto es una aplicación de chat funcional desarrollada con **Angular 17+**. Simula una interfaz de mensajería moderna con gestión de contactos, envío de mensajes en tiempo real y persistencia de datos.
 
-## Development server
+## 🛠️ Instrucciones de Instalación y Uso
 
-To start a local development server, run:
+Sigue estos pasos para ejecutar el proyecto en tu entorno local:
 
-```bash
-ng serve
-```
+1. **Clonar el repositorio:**
+   ```bash
+   git clone [https://github.com/LeandroQuiroga7/chat-clon-UTN]
+2. **Instalar dependencias:**
+Ejecuta el siguiente comando para descargar los paquetes de Node.js necesarios:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+   ```bash
+   npm install
+3. **Iniciar el servidor de desarrollo:**
+Lanza la aplicación con el comando estándar de Angular CLI:
 
-## Code scaffolding
+   ```bash
+   ng serve
+4. **Acceder a la aplicación:**
+Abre tu navegador y navega a: http://localhost:4200
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+📂 Estructura del Proyecto
+La aplicación se organiza siguiendo las mejores prácticas de Angular, separando responsabilidades:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**/src/app/components:**
 
-```bash
-ng generate --help
-```
+- ChatList: Gestiona el panel lateral, el buscador y la lista de conversaciones disponibles.
 
-## Building
+- ChatWindow: Gestiona la visualización del chat activo, el historial de burbujas y el campo de entrada de texto.
 
-To build the project run:
+**/src/app/services:**
 
-```bash
-ng build
-```
+- ChatService: Centraliza el estado de la aplicación mediante Angular Signals. Maneja la lógica de envío de mensajes, respuestas automáticas y la persistencia de datos.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+**/src/app/models:** 
 
-## Running unit tests
+- Contiene las interfaces TypeScript (Chat, Message) para garantizar la consistencia de los datos.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+🛣️ Rutas (Navigation)
+El proyecto utiliza el sistema de rutas dinámicas de Angular:
 
-## Running end-to-end tests
+(Raíz): Muestra la lista de contactos y un estado vacío en el área de conversación.
 
-For end-to-end (e2e) testing, run:
+chats/:id': Carga dinámicamente la ventana de conversación filtrando por el ID proporcionado en la URL.
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+🧪 Cómo Probar la Aplicación
 
-## Additional Resources
+Para verificar el funcionamiento completo, se recomiendan los siguientes pasos:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Mensajería: Selecciona un contacto, envía un mensaje y observa la respuesta automática del bot. 
+
+2. Persistencia (LocalStorage): Escribe mensajes o agrega nuevos chats y recarga la página (F5). Los datos se mantendrán almacenados en el navegador.
+
+3. Buscador: Utiliza la barra de búsqueda lateral para filtrar contactos por nombre en tiempo real.
+
+4. Responsive Design: Achica la ventana del navegador o activa el "Modo Dispositivo" (móvil). La interfaz ocultará la lista lateral automáticamente al entrar en un chat para optimizar el espacio.
